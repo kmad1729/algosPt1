@@ -7,16 +7,18 @@ using std::endl;
 class QuickFind {
     private:
         int *id;
+        int N;
     public:
         QuickFind(int);
         void union_pts(int, int);
         bool connected(int, int) const;
 };
 
-QuickFind::QuickFind(int N)
+QuickFind::QuickFind(int n)
 {
-    id = (int *) malloc(N * sizeof(int));
-    for(int i = 0; i < N; i++)
+    N = n;
+    id = new int[N];
+    for(int i = 0; i < n; i++)
         id[i] = i;
 }
 
@@ -29,7 +31,6 @@ void QuickFind::union_pts(int p, int q)
     if(id[p] != id[q]) {
         int p_id = id[p];
         int q_id = id[q];
-        int N = (sizeof(id) / sizeof(id[0]));
         for(int i = 0; i < N; i++) {
             if(id[i] == p_id)
                 id[i] = q_id;
